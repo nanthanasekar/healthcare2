@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('data:image/jpeg;base64,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'); 
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(225, 215, 215, 0.5); /* Dark transparent overlay */
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white; /* White color for heading */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: white; /* White color for labels */
+        }
+
+        .form-group input, .form-group select, .form-group button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .submit-btn {
+            background-color: #04043e;
+            color: white;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .social-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-links img {
+            width: 40px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .chart {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Healthcare Dashboard</h1>
+
+        <!-- Form for Name, Age, File Upload, and Submit -->
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <select id="age" name="age" required>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                    <option value="60">60</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="file">Upload File:</label>
+                <input type="file" id="file" name="file" accept=".csv" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+
+        <!-- Display the chart if the form is submitted -->
+        {% if graph_html %}
+            <div class="chart">
+                {{ graph_html|safe }}
+            </div>
+            <div class="result-info">
+                <p><strong>Name:</strong> {{ name }}</p>
+                <p><strong>Age:</strong> {{ age }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+   
+
+</body>
+</html>
